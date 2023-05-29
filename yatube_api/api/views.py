@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from posts.models import Post, Group
+from posts.models import Post, Group, Comment, Follow
 from api.serializers import (
     PostSerializer, GroupsSerializer, CommentSerializer)
 from api.permissions import IsAuthorOrReadOnly
@@ -33,3 +33,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return get_post(self.kwargs['post_id']).comments.all()
+
+
+class FollowViewSet(viewsets.ModelViewSet):
+    ...
