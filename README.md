@@ -1,2 +1,28 @@
-# Project  api_yatube 
-api final
+Как запустить проект:
+
+Клонировать репозиторий и перейти в него в командной строке:
+
+git clone https://github.com/yandere410/api_final_yatube
+
+cd api_final_yatube
+
+Cоздать и активировать виртуальное окружение:
+
+python3 -m venv env
+
+source venv/bin/activate
+
+Установить зависимости из файла requirements.txt:
+
+python3 -m pip install --upgrade pip
+
+pip install -r requirements.txt
+
+Выполнить миграции:
+
+python3 manage.py migrate
+
+Запустить проект:
+
+python3 manage.py runserver
+
