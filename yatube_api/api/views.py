@@ -19,8 +19,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """ViewSet for Posts"""
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsAuthorOrReadOnly, ]
+    permission_classes = [IsAuthorOrReadOnly, ]
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
@@ -31,15 +30,13 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     """Groups view set"""
     queryset = Group.objects.all()
     serializer_class = GroupsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
     pagination_class = LimitOffsetPagination
 
 
 class CommentViewSet(viewsets.ModelViewSet):
     """Comment view set"""
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthorOrReadOnly,
-                          permissions.IsAuthenticatedOrReadOnly, ]
+    permission_classes = [IsAuthorOrReadOnly, ]
 
     def get_queryset(self):
         return get_post(self.kwargs['post_id']).comments.all()
@@ -56,7 +53,7 @@ class FollowViewSet(CreateListViewSet):
     serializer_class = FollowSerializer
     permission_classes = [permissions.IsAuthenticated, ]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['user__username', 'following__username']
+    search_fields = ['=user__username', '=following__username']
 
     def get_queryset(self):
         return self.request.user.follower.all()
